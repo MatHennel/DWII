@@ -14,7 +14,7 @@ class CreateDocenciasTable extends Migration
     public function up()
     {
         Schema::create('docencias', function (Blueprint $table) {
-            //$table->id();
+            $table->id();
             $table->unsignedBigInteger('disciplina_id');
             $table->foreign('disciplina_id')->references('id')->on('disciplinas');
             $table->unsignedBigInteger('professor_id');

@@ -39,10 +39,13 @@ class DisciplinaController extends Controller
      */
     public function store(Request $request)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'carga' => 'required',
+        ]);
 
         Disciplina::create([
-            'nome' => mb_strtoupper($request->nome, $encoding), 
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'), 
             'curso_id' => $request->curso,
             'carga' => $request->carga,
         ]);
@@ -85,11 +88,14 @@ class DisciplinaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'carga' => 'required',
+        ]);
         
         $reg = Disciplina::find($id);
         $reg->fill([
-            'nome' => mb_strtoupper($request->nome), 
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'), 
             'curso_id' => $request->curso,
             'carga' => $request->carga,
         ]);

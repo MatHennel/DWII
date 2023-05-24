@@ -72,7 +72,7 @@
                     class="form-select"
                     class="form-control @if($errors->has('eixo')) is-invalid @endif" 
                 >
-                    <option value="">Selecione a Área/Eixo</option>
+                    <option value="" disabled selected></option>
                     @foreach ($eixos as $item)
                         <option value="{{$item->id}}" @if($item->id == old('eixo')) selected="true" @endif>
                             {{ $item->nome }}

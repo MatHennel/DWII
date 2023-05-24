@@ -41,10 +41,14 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'siape' => 'required',
+        ]);
 
         Professor::create([
-            'nome' => mb_strtoupper($request->nome, $encoding), 
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'), 
             'email' => $request->email,
             'siape' => $request->siape,
             'eixo_id' => $request->eixo,
@@ -89,15 +93,20 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'siape' => 'required',
+        ]);
 
         $reg = Professor::find($id);
+        $ativo = $reg->ativo;
         $reg->fill([
-            'nome' => mb_strtoupper($request->nome, $encoding), 
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'), 
             'email' => $request->email,
             'siape' => $request->siape,
             'eixo' => $request->eixo,
-            'ativo' => $request->status,
+            'ativo' => $ativo,
         ]);
         $reg->save();
 

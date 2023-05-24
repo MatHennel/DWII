@@ -36,10 +36,13 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required'
+        ]);
 
         AreaEixo::create([
-            'nome' => mb_strtoupper($request->nome, $encoding),
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
             'descricao' => $request->descricao
         ]);
 
@@ -80,11 +83,14 @@ class EixoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required'
+        ]);
 
         $reg = AreaEixo::find($id);
         $reg->fill([
-            "nome" => mb_strtoupper($request->nome, $encoding),
+            "nome" => mb_strtoupper($request->nome, 'UTF-8'),
             'descricao' => $request->descricao
         ]);
         $reg->save();

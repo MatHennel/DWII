@@ -39,11 +39,15 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'sigla' => 'required',
+            'tempo' => 'required'
+        ]);
 
         Curso::create([
-            'nome' => mb_strtoupper($request->nome, $encoding),
-            'sigla' => mb_strtoupper($request->sigla, $encoding),
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'sigla' => mb_strtoupper($request->sigla, 'UTF-8'),
             'tempo' => $request->tempo,
             'eixo_id' => $request->eixo,
         ]);
@@ -86,12 +90,16 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $encoding = mb_internal_encoding();
+        $request->validate([
+            'nome' => 'required',
+            'sigla' => 'required',
+            'tempo' => 'required'
+        ]);
 
         $reg = Curso::find($id);
         $reg->fill([
-            'nome' => mb_strtoupper($request->nome, $encoding),
-            'sigla' => mb_strtoupper($request->sigla, $encoding),
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'sigla' => mb_strtoupper($request->sigla, 'UTF-8'),
             'tempo' => $request->tempo,
             'eixo_id' => $request->eixo,
         ]);

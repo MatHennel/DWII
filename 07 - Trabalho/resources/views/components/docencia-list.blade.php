@@ -25,7 +25,7 @@
                     <td class="d-none d-md-table-cell text-center">{{ strtoupper($disciplina->nome) }}</td>
                     <td>
                         <select name="docencia[]" class="form-select form-select-sm" required>
-                            <option value="">-- Selecione o Professor --</option>
+                            <option value="" disabled selected>-- Selecione o Professor --</option>
                             @foreach ($professores as $professor)
                                 @php $id = 0 @endphp
                                 @foreach ($docencia as $doc)    

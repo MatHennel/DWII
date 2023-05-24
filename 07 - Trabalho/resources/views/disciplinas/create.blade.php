@@ -12,11 +12,16 @@
                 <div class="form-floating mb-3">
                     <input 
                         type="text" 
-                        class="form-control" 
+                        class="form-control @if($errors->has('nome')) is-invalid @endif" 
                         name="nome" 
                         placeholder="Nome"
                         value="{{old('nome')}}"
                     />
+                    @if($errors->has('nome'))
+                        <div class='invalid-feedback'>
+                            {{ $errors->first('nome') }}
+                        </div>
+                    @endif
                     <label for="nome">Nome da Disciplina</label>
                 </div>
             </div>
@@ -30,7 +35,7 @@
                         class="form-select"
                         class="form-control @if($errors->has('curso')) is-invalid @endif" 
                     >
-                        <option value="">Selecione o Curso</option>
+                        <option value="" disabled selected></option>
                         @foreach ($cursos as $item)
                             <option value="{{$item->id}}" @if($item->id == old('curso')) selected="true" @endif>
                                 {{ $item->nome }}
